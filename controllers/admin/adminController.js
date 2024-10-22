@@ -40,7 +40,7 @@ module.exports = {
         filename: "./dashboard",
         data: { activeOrders, users, products, categories },
         route: "dashboard",
-        admin:req.admins.admin,
+        admin: req.admins.admin,
       });
     } catch (error) {
       console.log("error in dashboard", error);

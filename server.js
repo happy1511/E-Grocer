@@ -7,6 +7,7 @@ const passport = require("passport");
 const cors = require("cors");
 const MySQLStore = require("express-mysql-session")(session);
 const mysql = require("mysql2");
+const path = require("path");
 
 const bodyParser = require("body-parser");
 
@@ -41,6 +42,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(cors());
