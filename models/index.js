@@ -9,5 +9,12 @@ const sequelize = new Sequelize({
   port: process.env.SQL_PORT,
 });
 
-sequelize.sync();
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Database & tables created!");
+  })
+  .catch((err) => {
+    console.log("sequelize error" + err);
+  });
 module.exports = { sequelize };

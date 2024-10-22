@@ -5,16 +5,28 @@ const cloudinary = require("cloudinary").v2;
 const session = require("express-session");
 const passport = require("passport");
 const cors = require("cors");
+const MySQLStore = require("express-mysql-session")(session);
+const mysql = require("mysql2");
 
 const bodyParser = require("body-parser");
 
 let app = express();
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+});
+
+// Create a session store
+const sessionStore = new MySQLStore({}, connection);
 
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: sessionStore,
     cookie: { maxAge: 48 * 60 * 60 * 1000 },
   })
 );
