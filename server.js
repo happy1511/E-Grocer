@@ -12,10 +12,11 @@ const bodyParser = require("body-parser");
 
 let app = express();
 const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
+  host: process.env.MYSQL_CONNECTION_STRING,
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
+  port: process.env.SQL_PORT,
 });
 
 // Create a session store
